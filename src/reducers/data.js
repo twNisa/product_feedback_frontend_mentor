@@ -1,9 +1,4 @@
-{
-  "currentUser": {
-    "image": "./assets/user-images/image-zena.jpg",
-    "name": "Zena Kelley",
-    "username": "velvetround"
-  },
+export const data = {
   "productRequests": [
     {
       "id": 1,
