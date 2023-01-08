@@ -34,8 +34,18 @@ export const UpvoteButton = styled(TagButton)`
   width: 2.8rem;
   height: 4.2rem;
   gap: .5rem;
+
   span{
     color: black;
   }
 
+`
+
+export const HorizontalUpvoteButton = styled(UpvoteButton)`
+  flex-direction: row;
+  width: auto;
+  height: 2.3rem;
+  span{
+    color: black;
+  }
 `

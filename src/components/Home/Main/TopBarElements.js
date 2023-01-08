@@ -16,6 +16,10 @@ export const TopContainer = styled.div`
     align-items: center;
   }
 
+  & .suggestions{
+    display: flex;
+    gap: 1rem;
+  }
   & > button:last-of-type{
     margin-left: auto;
     padding: .6rem 1rem;
@@ -55,9 +59,15 @@ export const TopContainer = styled.div`
       
       .arrow[data-open="true"]{
           transform: rotate(180deg);
-        }
       }
     }
+  }
+
+  @media(width < 1100px){
+    & .suggestions{
+      display: none;
+    }
+  }
 
 `
 

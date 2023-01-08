@@ -4,10 +4,11 @@ import suggestionsIcon from "../../../assets/shared/icon-bulb.svg"
 import { TagButton } from "../../shared/TagButton";
 import {FaAngleUp} from "react-icons/fa"
 import { FaCheck } from "react-icons/fa"
+import { useEffect } from "react";
 
 export default function TopBar({count, currentSort, sortOptions, handleSortSelect}){
   const [dropdownOpen, setDropdownOpen] = React.useState(false)
-
+  
   function handleDropdownClick(){
     console.log("dropdown clicked")
     setDropdownOpen(prev => !prev)
@@ -38,12 +39,15 @@ export default function TopBar({count, currentSort, sortOptions, handleSortSelec
               >
                 Most Upvotes
               </button> */}
+
               
   return (
     <TopContainer>
       <div>
-        <img src={suggestionsIcon} />
-        <h2>{count} {count === 1 ? "Suggestion" : "Suggestions"}</h2>
+        <div className="suggestions">
+          <img src={suggestionsIcon} />
+          <h2>{count} {count === 1 ? "Suggestion" : "Suggestions"}</h2>
+        </div>
         <div className="sortDropdown">
           <button onClick={handleDropdownClick} >
             Sort by : <span>&nbsp;{sortOptions[currentSort]}&nbsp;</span> 

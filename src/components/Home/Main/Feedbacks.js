@@ -6,12 +6,17 @@ import commentsIcon from "../../../assets/shared/icon-comments.svg"
 import {FaAngleUp} from "react-icons/fa"
 
 export default function Feedbacks({feedbacks}){
+  function handleUpvoteClick(){
+    
+  }
+
+
   const feedbackItems = feedbacks.map((feedback) => (
     <FeedbackItem 
       key={feedback.id}
       id={feedback.id}
     >
-      <UpvoteButton><FaAngleUp /><span>{feedback.upvotes}</span></UpvoteButton>
+      <UpvoteButton onClick={handleUpvoteClick}><FaAngleUp /><span>{feedback.upvotes}</span></UpvoteButton>
       <div className="details">
         <h2>{feedback.title}</h2>
         <p>{feedback.description}</p>
