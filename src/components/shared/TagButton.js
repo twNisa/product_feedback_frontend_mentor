@@ -1,5 +1,6 @@
 import styled from "styled-components";
 import { COLORS } from "../../utils/ThemeConstants";
+import { Link } from "react-router-dom";
 
 export const TagButton = styled.button`
   border-radius: 10px;
@@ -39,6 +40,28 @@ export const UpvoteButton = styled(TagButton)`
     color: black;
   }
 
+`
+
+export const LinkButton = styled(Link)`
+  border-radius: 10px;
+  padding: .8rem 1rem;
+  cursor: pointer;
+  background-color: ${props => props.primary ? COLORS.purple : "rgb(240, 242, 255)"};
+  color: white;
+  transition: all .3s ease;
+  border: none;
+  font-size: 1rem;
+  font-weight: 600;
+  text-decoration: none;
+
+  transition: all .3s ease;
+  &:hover{
+    filter: brightness(1.2);
+  }
+`
+
+export const Button = styled(LinkButton)`
+  background-color: ${props => props.primary ? COLORS.purple : COLORS.darkBlue};
 `
 
 export const HorizontalUpvoteButton = styled(UpvoteButton)`

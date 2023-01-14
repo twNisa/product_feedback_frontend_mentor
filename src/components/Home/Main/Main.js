@@ -7,6 +7,8 @@ import TopBar from "./TopBar"
 
 export default function Main(props){
   const sortOptions = [
+    "Most Recent",
+    "Least Recent",
     "Most Upvotes",
     "Least Upvotes",
     "Most Comments",
@@ -19,7 +21,7 @@ export default function Main(props){
     setCurrentSort(id)
   }
 
-  const currentFilter = useSelector((state) => state.filters.filter)
+  const currentFilter = useSelector((state) => state.filter.filter)
   // const currentSort = useSelect((state) => state.sort)
   const feedbacks = useSelector(state => state.feedbacks.productRequests)
 
@@ -29,21 +31,33 @@ export default function Main(props){
     filteredFeedbacks = feedbacks.filter(feedback => (feedback.category === currentFilter))
 
   const suggestionsCount = filteredFeedbacks.length
-  
+
   let sortedFeedbacks
   if(currentSort === 0){
     sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
-      return b.upvotes - a.upvotes
+      const aD = a.date === undefined ? "0" : a.date
+      const bD = b.date === undefined ? "0" : b.date
+      return bD.localeCompare(aD)
     })
   } else if(currentSort === 1){
     sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
-      return a.upvotes - b.upvotes
+      const aD = a.date === undefined ? "0" : a.date
+      const bD = b.date === undefined ? "0" : b.date
+      return aD.localeCompare(bD)
     })
   } else if(currentSort === 2){
     sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
-      return b.comments.length - a.comments.length
+      return b.upvotes - a.upvotes
     })
   } else if(currentSort === 3){
+    sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
+      return a.upvotes - b.upvotes
+    })
+  } else if(currentSort === 4){
+    sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
+      return b.comments.length - a.comments.length
+    })
+  } else if(currentSort === 5){
     sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
       return a.comments.length - b.comments.length
     })

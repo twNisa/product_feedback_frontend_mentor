@@ -37,6 +37,7 @@ export const FeedbackItem = styled.div`
     flex-direction: column;
     align-items: flex-start;
     gap: 1rem;
+    text-transform: capitalize;
     h2{
       transition: all .3s ease;
       color:${COLORS.textGrayDark}
@@ -63,8 +64,4 @@ export const FeedbackItem = styled.div`
     font-weight: bold;
   }
   
-`
-
-export const dropdownMenu = styled.div`
-
 `

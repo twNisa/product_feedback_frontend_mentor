@@ -7,8 +7,17 @@ import { Provider } from 'react-redux';
 import store from './reducers/store';
 import Roadmap from "./pages/Roadmap/Roadmap"
 import App from "./App.js"
+import { loadLocalStorage, saveLocalStorage } from './utils/localStorage';
 
 const root = ReactDOM.createRoot(document.getElementById('root'));
+
+
+store.subscribe(()=>{
+  saveLocalStorage(store.getState())
+}
+
+)
+
 root.render(
   <React.StrictMode>
     <Provider store={store}>

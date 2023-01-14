@@ -4,6 +4,7 @@ import { TagButton } from "../../shared/TagButton";
 import { useDispatch, useSelector } from "react-redux";
 import {filterSet} from "../../../reducers/filtersSlice"
 import { NavLink } from "react-router-dom";
+
 export default function Sidebar(){
 
   const feedbacksData = useSelector((state) => state.feedbacks["productRequests"])
@@ -11,7 +12,7 @@ export default function Sidebar(){
   const inProgressCount = feedbacksData.filter(item => item.status === "in-progress").length
   const liveCount = feedbacksData.filter(item => item.status === "live").length
   
-  const currentFilter = useSelector((state) => state.filters)
+  const currentFilter = useSelector((state) => state.filter)
  
   const filters = ["All", "UI", "UX", "Enhancement", "Bug", "Feature"]
   const dispatch = useDispatch()

@@ -20,16 +20,13 @@ export const TopContainer = styled.div`
     display: flex;
     gap: 1rem;
   }
-  & > button:last-of-type{
+  & > a:last-of-type{
     margin-left: auto;
     padding: .6rem 1rem;
     line-height: 1.6;
     background-color: ${COLORS.purple};
     color: white;
-    transition: all .3s ease;
-    &:hover{
-      filter: brightness(1.2);
-    }
+    
   }
 
   & .sortDropdown {

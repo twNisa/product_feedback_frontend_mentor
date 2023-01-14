@@ -1,25 +1,33 @@
 import React from "react";
-import { NavLink } from "react-router-dom";
+import { NavLink, Link, useLocation, useNavigate } from "react-router-dom";
 import { FaAngleLeft } from "react-icons/fa";
-import { TagButton } from "../shared/TagButton";
+import { LinkButton } from "../shared/TagButton";
 import { TopBarContainer } from "./TopBarElements";
-
+import { BackButtonNavLink } from "../shared/BackButtonNavLink";
 export default function TopBar(){
+  console.log(useLocation)
+  const navigate=useNavigate()
   return (
     <TopBarContainer>
       <div>
-        <NavLink
-          to="/"
+        <BackButtonNavLink
+          onClick={()=>navigate(-1)}
         >
           <FaAngleLeft />
           <span>Go Back</span>
-        </NavLink>
+        </BackButtonNavLink>
         <h2>
           Roadmap
         </h2>
       </div>
       
-      <TagButton>+ Add Feedback</TagButton>
+      <LinkButton
+        primary
+    
+        to="/add"
+      >
+        + Add Feedback
+      </LinkButton>
     </TopBarContainer>
   )
 } 

@@ -1,7 +1,7 @@
 export const loadLocalStorage =()=>{
   try{
     const localStore = localStorage.getItem("store")
-    if(localStore === "null"){
+    if(localStore === null){
       return undefined
     }
     return JSON.parse(localStore)

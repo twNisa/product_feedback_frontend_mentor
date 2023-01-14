@@ -4,6 +4,7 @@ import {RoadmapTableContainer, RoadmapItem, RoadmapCategoryContainer, RoadmapCat
 import {TagButton, HorizontalUpvoteButton} from "../../components/shared/TagButton"
 import { FaAngleUp } from "react-icons/fa";
 import commentsIcon from "../../assets/shared/icon-comments.svg"
+import formatType from "../../utils/formatType";
 
 export default function RoadmapTable(){
 
@@ -27,11 +28,7 @@ export default function RoadmapTable(){
     }
   ]
   
-  function formatType(type){
-    const words = type.split("-")
-    return words.map(word => (word[0].toUpperCase() + word.slice(1))).join("-")
-  }
-
+  
   const roadmapItems = categories.map((category, index) => {
     const categoryFeedbacks = feedbacksData.filter(item => item.status === category.type)
 
