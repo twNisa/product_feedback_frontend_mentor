@@ -33,9 +33,16 @@ export const UpvoteButton = styled(TagButton)`
   align-items: center;
   justify-items: center;
   width: 2.8rem;
-  height: 4.2rem;
+  height: 3.6rem;
   gap: .5rem;
-
+  align-self: flex-start;
+  &[data-upvoted="true"]{
+    background-color: ${COLORS.blue};
+    color:white;
+    span{
+      color:white;
+    }
+  }
   span{
     color: black;
   }
@@ -46,7 +53,7 @@ export const LinkButton = styled(Link)`
   border-radius: 10px;
   padding: .8rem 1rem;
   cursor: pointer;
-  background-color: ${props => props.primary ? COLORS.purple : "rgb(240, 242, 255)"};
+  background-color: ${props => props.primary ? COLORS.purple : COLORS.blue};
   color: white;
   transition: all .3s ease;
   border: none;
@@ -72,3 +79,4 @@ export const HorizontalUpvoteButton = styled(UpvoteButton)`
     color: black;
   }
 `
+

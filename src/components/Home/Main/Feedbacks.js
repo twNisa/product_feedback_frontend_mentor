@@ -21,12 +21,23 @@ export default function Feedbacks({feedbacks}){
     navigate(path)
   }
 
-  const feedbackItems = feedbacks.map((feedback) => (
-    <FeedbackItem 
+  const feedbackItems = feedbacks.map((feedback) => {
+    const amountOfComments = feedback.comments ?  
+    feedback.comments.reduce((accu, curr) => {
+      if (curr.hasOwnProperty("replies")){
+        return accu + curr.replies.length+ 1
+      } else{
+        return accu + 1
+      }
+    }, 0) 
+  : 0
+
+    return <FeedbackItem 
       key={feedback.id}
       id={feedback.id}
+      
     >
-      <UpvoteButton onClick={()=>handleUpvoteClick(feedback.id)}><FaAngleUp /><span>{feedback.upvotes}</span></UpvoteButton>
+      <UpvoteButton data-upvoted={feedback.upvoted} onClick={()=>handleUpvoteClick(feedback.id)}><FaAngleUp /><span>{feedback.upvotes}</span></UpvoteButton>
       <div className="details" onClick={() => routeToView(feedback.id)}>
         <h2>{feedback.title}</h2>
         <p>{feedback.description}</p>
@@ -34,10 +45,10 @@ export default function Feedbacks({feedbacks}){
       </div>
       <div className="comments" onClick={() => routeToView(feedback.id)}>
         <img src={commentsIcon}></img>
-        {feedback.comments.length}
+        {amountOfComments}
       </div>
     </FeedbackItem>
-  ))
+})
 
   return (
     <ContentContainer>

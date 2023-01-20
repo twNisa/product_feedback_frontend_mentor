@@ -2,7 +2,7 @@ import React from "react";
 import {Routes, Route, useLocation, useNavigate} from "react-router-dom"
 import Roadmap from "./pages/Roadmap/Roadmap";
 import Home from "./pages/Home/Home";
-import FeedbackView from "./pages/Feedback/FeedbackView"
+import FeedbackViewPage from "./pages/Feedback/FeedbackViewPage"
 import FeedbackEdit from "./pages/Feedback/FeedbackEdit"
 import FeedbackAddPage from "./pages/Feedback/FeedbackAddPage"
 import { ToastContainer } from "react-toastify";
@@ -17,7 +17,7 @@ export default function App(){
     <Routes>
       <Route path="/" element={<Home /> } />
       <Route path="/roadmap" element={<Roadmap />} />
-      <Route path="/feedback/:id" element={<FeedbackView />} />
+      <Route path="/feedback/:id" element={<FeedbackViewPage />} />
       {/* <Route exact path="/feedback/:id/edit" element={<FeedbackEdit />} /> */}
       <Route path="/add" element={<FeedbackAddPage />} />
     </Routes>
