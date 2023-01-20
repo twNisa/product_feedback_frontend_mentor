@@ -15,11 +15,11 @@ export default function App(){
     <>
     <ToastContainer />
     <Routes>
-      <Route path="/" element={<Home /> } />
-      <Route path="/roadmap" element={<Roadmap />} />
-      <Route path="/feedback/:id" element={<FeedbackViewPage />} />
+      <Route path="/product_feedback_frontend_mentor/" element={<Home /> } />
+      <Route path="/product_feedback_frontend_mentor/roadmap" element={<Roadmap />} />
+      <Route path="/product_feedback_frontend_mentor/feedback/:id" element={<FeedbackViewPage />} />
       {/* <Route exact path="/feedback/:id/edit" element={<FeedbackEdit />} /> */}
-      <Route path="/add" element={<FeedbackAddPage />} />
+      <Route path="/product_feedback_frontend_mentor/add" element={<FeedbackAddPage />} />
     </Routes>
 
     </>
