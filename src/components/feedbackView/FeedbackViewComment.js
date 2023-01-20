@@ -33,7 +33,7 @@ function FeedbackComment({comment}){
   }
 
   return (
-    <FeedbackViewCommentItem>
+    <FeedbackViewCommentItem >
       <img alt={comment.user.name} src={process.env.PUBLIC_URL + `.${comment.user.image}`}/>
       <div className="user-comment">
         <div className="user-header"> 
@@ -54,7 +54,7 @@ function FeedbackComment({comment}){
 
 function ChildComments({replies}){
   console.log(replies)
-  const allReplies = replies.map(reply => <FeedbackComment comment={reply} /> )
+  const allReplies = replies.map(reply => <FeedbackComment key={reply.id} comment={reply} /> )
 
   return allReplies
   // const allReplies=replies.map(comment => {

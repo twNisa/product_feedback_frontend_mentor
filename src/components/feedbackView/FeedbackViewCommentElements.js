@@ -55,9 +55,9 @@ export const FeedbackViewCommentItem = styled.section`
     cursor: pointer;
     align-self: flex-start;
     font-weight: bold;
-    color: ${props => props.active==="true" ? "red" : "black"};
+    color: ${props => !props.active ? COLORS.background : "red"};
     position: relative;
-
+    
     &:after{
       content: "";
       position: absolute;
