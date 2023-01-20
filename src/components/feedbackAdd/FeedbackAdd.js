@@ -9,6 +9,7 @@ import {useDispatch, useSelector } from "react-redux"
 import feedbacksSlice from "../../reducers/feedbacksSlice";
 import { addFeedback } from "../../reducers/feedbacksSlice";
 import { addSuccess, feedbackExists } from "../../utils/toasts";
+
 export default function FeedbackAdd(){
   const [newFeedback, setNewFeedback] = React.useState({
     title: "",
@@ -29,7 +30,7 @@ export default function FeedbackAdd(){
   }
 
   const feedbacks = useSelector(state => state.feedbacks.productRequests)
-  
+
   const dispatch = useDispatch()
 
   function handleFeedbackAddSubmit(e){
@@ -43,7 +44,7 @@ export default function FeedbackAdd(){
       dispatch(
         addFeedback(newFeedback)
       )
-      navigate("/")
+      navigate("/product_feedback_frontend_mentor/")
       addSuccess()
     }
 

@@ -24,7 +24,7 @@ export default function TopBar(){
       <LinkButton
         primary
     
-        to="/add"
+        to="/product_feedback_frontend_mentor/add"
       >
         + Add Feedback
       </LinkButton>

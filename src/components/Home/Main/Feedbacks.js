@@ -17,7 +17,7 @@ export default function Feedbacks({feedbacks}){
 
   }
   function routeToView(id){
-    let path = `/feedback/${id}`
+    let path = `/product_feedback_frontend_mentor/feedback/${id}`
     navigate(path)
   }
 
@@ -29,8 +29,7 @@ export default function Feedbacks({feedbacks}){
       } else{
         return accu + 1
       }
-    }, 0) 
-  : 0
+    }, 0) : 0
 
     return <FeedbackItem 
       key={feedback.id}
@@ -48,7 +47,7 @@ export default function Feedbacks({feedbacks}){
         {amountOfComments}
       </div>
     </FeedbackItem>
-})
+  })
 
   return (
     <ContentContainer>
