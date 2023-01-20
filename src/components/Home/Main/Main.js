@@ -25,6 +25,21 @@ export default function Main(props){
   // const currentSort = useSelect((state) => state.sort)
   const feedbacks = useSelector(state => state.feedbacks.productRequests)
 
+  
+
+  function getFeedbackCommentsAmount(feedback){
+    const amountOfComments = feedback.comments ?  
+    feedback.comments.reduce((accu, curr) => {
+      if (curr.hasOwnProperty("replies")){
+        return accu + curr.replies.length+ 1
+      } else{
+        return accu + 1
+      }
+    }, 0) : 0
+
+    return amountOfComments
+  }
+
   let filteredFeedbacks;
   currentFilter === "all" ? 
     filteredFeedbacks = feedbacks : 
@@ -55,11 +70,11 @@ export default function Main(props){
     })
   } else if(currentSort === 4){
     sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
-      return b.comments.length - a.comments.length
+      return getFeedbackCommentsAmount(b) - getFeedbackCommentsAmount(a)
     })
   } else if(currentSort === 5){
     sortedFeedbacks = [...filteredFeedbacks].sort((a, b)=>{
-      return a.comments.length - b.comments.length
+      return getFeedbackCommentsAmount(a) - getFeedbackCommentsAmount(b)
     })
   }
 

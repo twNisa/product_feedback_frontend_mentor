@@ -30,6 +30,10 @@ export const FeedbackViewCommentItem = styled.section`
     gap: 1rem;
     width: 100%;
     /* align-items: center; */
+
+    & >p{
+      margin-right:2rem;
+    }
   }
   & .user-header{
     display: flex;
