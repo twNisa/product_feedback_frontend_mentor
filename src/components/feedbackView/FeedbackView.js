@@ -14,13 +14,16 @@ import commentsIcon from "../../assets/shared/icon-comments.svg"
 import { ReplyButton } from "../shared/TagButton";
 import FeedbackViewChildReplyModal from "./FeedbackViewChildReplyModal";
 import { FeedbackViewComment } from "./FeedbackViewComment";
+import { addComment } from "../../reducers/feedbacksSlice";
+import { nanoid } from "@reduxjs/toolkit";
+import localUser from "../../utils/localUser";
 
 export default function FeedbackView(){
   const navigate = useNavigate()
   const location = useLocation()
   const dispatch = useDispatch()
 
-  const feedbackId = location.pathname.replace("/feedback/", "")
+  const feedbackId = location.pathname.replace("/product_feedback_frontend_mentor/feedback/", "")
   const feedbacks = useSelector(store => store.feedbacks.productRequests)
   const currentFeedback = feedbacks.find(feedback => String(feedback.id) === feedbackId)
 
@@ -39,8 +42,7 @@ export default function FeedbackView(){
   //   }
   // });
   // console.log(commentsAmount)
-
-  const amountOfComments = currentFeedback.comments ?  
+  const amountOfComments = currentFeedback.comments && currentFeedback.comments ?  
     currentFeedback.comments.reduce((accu, curr) => {
       if (curr.hasOwnProperty("replies")){
         return accu + curr.replies.length+ 1
@@ -59,7 +61,7 @@ export default function FeedbackView(){
     const allComments =
     currentFeedback.comments && 
     currentFeedback.comments.map((comment, index) => {
-      return <FeedbackViewComment key={comment.id} id={comment.id} comment={comment} />
+      return <FeedbackViewComment key={comment.id} id={comment.id} comment={comment} parentId={currentFeedback.id} />
     })
 
     return (
@@ -77,6 +79,23 @@ export default function FeedbackView(){
     setComment(e.target.value)
   }
 
+  function handleCommentButtonClick(){
+    console.log(comment)
+    if(comment){
+      const formatedComment = {
+        replyId: currentFeedback.id,
+        comment: {
+          id: nanoid(),
+          content: comment,
+          user: localUser,
+        }
+      }
+      dispatch(addComment(formatedComment))
+    }
+    
+    setComment("")
+
+  }
   return (
     <FeedbackViewContainer>
       <FeedbackViewNav>
@@ -118,7 +137,7 @@ export default function FeedbackView(){
       <FeedbackViewAddComment>
         <h2>Add Comment</h2>
         <textarea name="comment" maxLength={255} value={comment} onChange={(e)=>handleCommentChange(e)} />
-        <Button as="button" primary>Post Comment </Button>
+        <Button as="button" primary onClick={handleCommentButtonClick}>Post Comment </Button>
       </FeedbackViewAddComment>
     </FeedbackViewContainer>
   )

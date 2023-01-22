@@ -43,11 +43,38 @@ const feedbacksSlice = createSlice({
           feedbackToUpvote.upvotes--
         }
       }
+    },
+    addComment(state, action){
+      console.log(action)
+      const feedbackToComment = state.productRequests.find(feedback => feedback.id === action.payload.replyId)
+      console.log(feedbackToComment)
+
+      if(feedbackToComment){
+        feedbackToComment.comments ? 
+          feedbackToComment.comments.push(action.payload.comment)
+        : feedbackToComment.comments = [action.payload.comment]
+      }
+    },
+    addReply(state, action){
+      console.log(action.payload)
+      const feedbackToComment = state.productRequests.find(feedback => feedback.id === action.payload.parentId)
+
+      const commentToReply = feedbackToComment.comments.find(reply => reply.id = action.payload.commentId)
+      console.log(feedbackToComment)
+      if(commentToReply.replies){
+        commentToReply.replies.push(action.payload.replyContent)
+      } else{
+        commentToReply.replies = [action.payload.replyContent]
+      }
+
+
+
     }
+
   }
 
 })
 
-export const {addFeedback, updateFeedback, upvoteFeedback} = feedbacksSlice.actions
+export const {addFeedback, updateFeedback, upvoteFeedback, addComment, addReply} = feedbacksSlice.actions
 
 export default feedbacksSlice.reducer

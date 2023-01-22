@@ -45,7 +45,7 @@ export default function Sidebar(){
       <RoadmapContainer>
         <div>
           <h2>Roadmap</h2>
-          <NavLink to="/roadmap" as="button">View</NavLink>
+          <NavLink to="/product_feedback_frontend_mentor/roadmap" as="button">View</NavLink>
         </div>
         <RoadList>
             <RoadListItem color="Orange" data-count={plannedCount}>

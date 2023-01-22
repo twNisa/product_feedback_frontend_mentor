@@ -15,7 +15,7 @@ export default function FeedbackAdd(){
     title: "",
     description: "",
     category: "feature",
-    status: "planned",
+    status: "suggestion",
   })
 
   function handleFormInputChange(event){

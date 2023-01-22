@@ -2,6 +2,9 @@ import React from "react";
 import {FeedbackViewCommentItem} from "./FeedbackViewCommentElements"
 import { Button } from "../shared/TagButton";
 import { CommentItemReply } from "./FeedbackViewCommentElements";
+import localUser from "../../utils/localUser";
+import { useDispatch } from "react-redux";
+import { addReply } from "../../reducers/feedbacksSlice";
 
 function CommentReply({reply, handleReplyChange, postReply}) {
   // console.log(reply)
@@ -13,7 +16,9 @@ function CommentReply({reply, handleReplyChange, postReply}) {
   )
 }
 
-function FeedbackComment({comment}){
+export function FeedbackViewComment({comment, parentId}){
+  const dispatch = useDispatch()
+
   const [reply, setReply] = React.useState("")
   const [isReplyOpen, setIsReplyOpen] = React.useState(false)
 
@@ -26,90 +31,90 @@ function FeedbackComment({comment}){
   }
 
   function postReply(){
-    console.log(comment)
-    
-    handleReplyToggle()
-    setReply("")
-  }
-
-  return (
-    <FeedbackViewCommentItem >
-      <img alt={comment.user.name} src={process.env.PUBLIC_URL + `.${comment.user.image}`}/>
-      <div className="user-comment">
-        <div className="user-header"> 
-          <div className="user-name">
-            <h4>{comment.user.name}</h4>
-            <p>@{comment.user.username}</p> 
-          </div>
-          <button active={isReplyOpen.toString()} onClick={(e) => handleReplyToggle(e)}>{isReplyOpen ? "Cancel" : "Reply"}</button>  
-        </div> 
-        <p>{comment.content}</p>
-        {isReplyOpen && <CommentReply key={comment.id} reply={reply} handleReplyChange={handleReplyChange} postReply={postReply}/> }
-
-        {comment.replies && <ChildComments replies={comment.replies} />}
-      </div>
-    </FeedbackViewCommentItem>
-  )
-}
-
-function ChildComments({replies}){
-  console.log(replies)
-  const allReplies = replies.map(reply => <FeedbackComment key={reply.id} comment={reply} /> )
-
-  return allReplies
-  // const allReplies=replies.map(comment => {
-    
-  //   return (
-  //     <FeedbackViewCommentItem>
-  //       <img alt={comment.user.name} src={process.env.PUBLIC_URL + `.${comment.user.image}`}/>
-  //       <div className="user-comment">
-  //         <div className="user-header"> 
-  //           <div className="user-name">
-  //             <h4>{comment.user.name}</h4>
-  //             <p>@{comment.user.username}</p> 
-  //           </div>
-  //           <button active={isReplyOpen.toString()} onClick={(e) => handleReplyToggle(e)}>{isReplyOpen ? "Cancel" : "Reply"}</button>  
-  //         </div> 
-  //         <p>{comment.content}</p>
-  //         {isReplyOpen && <CommentReply key={comment.id} reply={reply} handleReplyChange={handleReplyChange} postReply={postReply}/> }
-  //       </div>
-  //     </FeedbackViewCommentItem>
-  //   )
-  //   })
-
-  //   return allReplies
-  
-}
-
-export function FeedbackViewComment({comment}){
-  const [reply, setReply] = React.useState("")
-  const [isReplyOpen, setIsReplyOpen] = React.useState(false)
-
-  function handleReplyChange(e){
-    setReply(e.target.value)
-  }
-
-  function handleReplyToggle(){
-    setIsReplyOpen(prev => !prev)
-  }
-
-  function postReply(){
-    console.log(comment)
-    
+    if(reply){
+      const formatedComment = {
+        parentId: parentId,
+        commentId: comment.id,
+        replyContent: {
+          content: reply,
+          replyingTo: comment.user.username,
+          user: localUser,
+        }
+      }
+      dispatch(addReply(formatedComment))
+    }
     handleReplyToggle()
     setReply("")
   }
 
   return (
     <FeedbackViewCommentItem data-children={comment.replies ? "true" : "false"}>
-      <img alt={comment.user.name} src={process.env.PUBLIC_URL + `.${comment.user.image}`}/>
+      <img alt={comment.user.name} src={process.env.PUBLIC_URL + `/${comment.user.image}`}/>
       <div className="user-comment">
         <div className="user-header"> 
           <div className="user-name">
             <h4>{comment.user.name}</h4>
             <p>@{comment.user.username}</p> 
           </div>
-          <button active={isReplyOpen.toString()} onClick={(e) => handleReplyToggle(e)}>{isReplyOpen ? "Cancel" : "Reply"}</button>  
+          <button isReplyOpen onClick={(e) => handleReplyToggle(e)}>{isReplyOpen ? "Cancel" : "Reply"}</button>  
+        </div> 
+        <p>{comment.content}</p>
+        {isReplyOpen && <CommentReply key={comment.id} reply={reply} handleReplyChange={handleReplyChange} postReply={postReply}/> }
+
+        {comment.replies && <ChildComments replies={comment.replies} parentId={parentId} commentId={comment.id} />}
+      </div>
+    </FeedbackViewCommentItem>
+  )
+}
+
+function ChildComments({replies, parentId, commentId}){
+  const allReplies = replies.map(reply => <FeedbackChildComment key={reply.id} comment={reply} parentId={parentId} commentId={commentId}/> )
+  return allReplies
+}
+
+
+function FeedbackChildComment({comment, parentId, commentId}){
+  const dispatch= useDispatch()
+
+  const [reply, setReply] = React.useState("")
+  const [isReplyOpen, setIsReplyOpen] = React.useState(false)
+
+  function handleReplyChange(e){
+    setReply(e.target.value)
+  }
+
+  function handleReplyToggle(){
+    setIsReplyOpen(prev => !prev)
+  }
+
+  function postReply(){
+    if(reply){
+      const formatedComment = {
+        parentId: parentId,
+        commentId: commentId,
+        replyContent: {
+          content: reply,
+          replyingTo: comment.user.username,
+          user: localUser,
+        }
+      } 
+      dispatch(addReply(formatedComment))
+
+    } 
+    handleReplyToggle()
+    setReply("")
+  }
+
+  return (
+    <FeedbackViewCommentItem >
+      <img alt={comment.user.name} src={process.env.PUBLIC_URL + `/${comment.user.image}`}/>
+      <div className="user-comment">
+        <div className="user-header"> 
+          <div className="user-name">
+            <h4>{comment.user.name}</h4>
+            <p>@{comment.user.username}</p> 
+          </div>
+          <button data-active={isReplyOpen.toString()} onClick={(e) => handleReplyToggle(e)}>{isReplyOpen ? "Cancel" : "Reply"}</button>  
         </div> 
         <p>{comment.content}</p>
         {isReplyOpen && <CommentReply key={comment.id} reply={reply} handleReplyChange={handleReplyChange} postReply={postReply}/> }
@@ -119,5 +124,4 @@ export function FeedbackViewComment({comment}){
     </FeedbackViewCommentItem>
   )
 }
-
 

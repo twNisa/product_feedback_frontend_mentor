@@ -59,7 +59,7 @@ export default function TopBar({count, currentSort, sortOptions, handleSortSelec
         
       </div>
 
-      <LinkButton to="/add" primary>+ Add Feedback</LinkButton>
+      <LinkButton to="/product_feedback_frontend_mentor/add" primary>+ Add Feedback</LinkButton>
     </TopContainer>
   )
 }
