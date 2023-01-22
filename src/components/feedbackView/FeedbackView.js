@@ -33,7 +33,6 @@ export default function FeedbackView(){
 
   }
 
-  
   // let commentsAmount = 0;
   // currentFeedback.comments.forEach(element => {
   //   commentsAmount += 1
@@ -63,7 +62,7 @@ export default function FeedbackView(){
     currentFeedback.comments.map((comment, index) => {
       return <FeedbackViewComment key={comment.id} id={comment.id} comment={comment} parentId={currentFeedback.id} />
     })
-
+    console.log(currentFeedback.comments)
     return (
       <FeedbackViewComments>
         {allComments}

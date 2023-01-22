@@ -25,7 +25,7 @@ export function FeedbackViewComment({comment, parentId}){
   function handleReplyChange(e){
     setReply(e.target.value)
   }
-
+  
   function handleReplyToggle(){
     setIsReplyOpen(prev => !prev)
   }

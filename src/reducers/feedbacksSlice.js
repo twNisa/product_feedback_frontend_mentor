@@ -58,17 +58,13 @@ const feedbacksSlice = createSlice({
     addReply(state, action){
       console.log(action.payload)
       const feedbackToComment = state.productRequests.find(feedback => feedback.id === action.payload.parentId)
+      const commentToReply = feedbackToComment.comments.find(comment => comment.id === action.payload.commentId)
 
-      const commentToReply = feedbackToComment.comments.find(reply => reply.id = action.payload.commentId)
-      console.log(feedbackToComment)
       if(commentToReply.replies){
         commentToReply.replies.push(action.payload.replyContent)
       } else{
         commentToReply.replies = [action.payload.replyContent]
       }
-
-
-
     }
 
   }

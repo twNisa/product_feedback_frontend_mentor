@@ -106,7 +106,7 @@ export const FeedbackItem = styled.div`
     margin-left: auto;
     display: flex;
     gap: .5rem;
-    cursor: pointer;
+    cursor: default;
     font-weight: bold;
   }
   
