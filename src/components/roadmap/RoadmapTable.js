@@ -5,9 +5,10 @@ import {TagButton, HorizontalUpvoteButton} from "../../components/shared/TagButt
 import { FaAngleUp } from "react-icons/fa";
 import commentsIcon from "../../assets/shared/icon-comments.svg"
 import formatType from "../../utils/formatType";
+import { useNavigate } from "react-router-dom";
 
 export default function RoadmapTable(){
-
+  const navigate = useNavigate()
   const feedbacksData = useSelector((state) => state.feedbacks["productRequests"])
 
   const categories = [
@@ -28,6 +29,9 @@ export default function RoadmapTable(){
     }
   ]
   
+  function handleItemClick(id){
+    navigate("/product_feedback_frontend_mentor/feedback/" + id)
+  }
   
   const roadmapItems = categories.map((category, index) => {
     const categoryFeedbacks = feedbacksData.filter(item => item.status === category.type)
@@ -38,9 +42,9 @@ export default function RoadmapTable(){
           <h2>{formatType(category.type)} ({categoryFeedbacks.length})</h2>
           <p>{category.desc}</p>
         </RoadmapCategoryTitle>
-        <RoadmapItemsContainer>
+        <RoadmapItemsContainer >
           {categoryFeedbacks.map((item, index)=>(
-            <RoadmapItem type={item.status} key={index} color={category.color}>
+            <RoadmapItem type={item.status} key={index} color={category.color} onClick={()=>handleItemClick(item.id)}>
               <RoadmapItemDetail color={category.color}>
                 <span className="status" >{item.status}</span>
                 <h2>{item.title}</h2>

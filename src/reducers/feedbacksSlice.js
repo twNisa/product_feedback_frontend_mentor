@@ -28,8 +28,20 @@ const feedbacksSlice = createSlice({
         }
       }
     },
-    updateFeedback(state, action){
-
+    editFeedback(state, action){
+      const feedbackToEdit = state.productRequests.find(feedback => String(feedback.id) === String(action.payload.id))
+      console.log(feedbackToEdit)
+      if(feedbackToEdit){
+        const result = state.productRequests.map(feedback => {
+          if(String(feedback.id) === String(action.payload.id)){
+            return action.payload
+          } else{
+            return feedback
+          }
+        })
+        console.log(result)
+        return {productRequests: result}
+      }
     },
     upvoteFeedback(state, action){
       console.log(action)
@@ -71,6 +83,6 @@ const feedbacksSlice = createSlice({
 
 })
 
-export const {addFeedback, updateFeedback, upvoteFeedback, addComment, addReply} = feedbacksSlice.actions
+export const {addFeedback, editFeedback, upvoteFeedback, addComment, addReply} = feedbacksSlice.actions
 
 export default feedbacksSlice.reducer

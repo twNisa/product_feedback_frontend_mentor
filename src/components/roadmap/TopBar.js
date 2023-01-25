@@ -5,7 +5,6 @@ import { LinkButton } from "../shared/TagButton";
 import { TopBarContainer } from "./TopBarElements";
 import { BackButtonNavLink } from "../shared/BackButtonNavLink";
 export default function TopBar(){
-  console.log(useLocation)
   const navigate=useNavigate()
   return (
     <TopBarContainer>

@@ -10,7 +10,6 @@ export default function TopBar({count, currentSort, sortOptions, handleSortSelec
   const [dropdownOpen, setDropdownOpen] = React.useState(false)
   
   function handleDropdownClick(){
-    console.log("dropdown clicked")
     setDropdownOpen(prev => !prev)
   }
 

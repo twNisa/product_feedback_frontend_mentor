@@ -7,6 +7,7 @@ import FeedbackEdit from "./pages/Feedback/FeedbackEdit"
 import FeedbackAddPage from "./pages/Feedback/FeedbackAddPage"
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import NotFound from "./pages/NotFound";
 
 export default function App(){
 
@@ -18,9 +19,10 @@ export default function App(){
       <Routes>
         <Route path="/product_feedback_frontend_mentor/" element={<Home /> } />
         <Route path="product_feedback_frontend_mentor/roadmap" element={<Roadmap />} />
-        <Route path="product_feedback_frontend_mentor/feedback/:id" element={<FeedbackViewPage />} />
-        {/* <Route exact path="/feedback/:id/edit" element={<FeedbackEdit />} /> */}
+        <Route path="product_feedback_frontend_mentor/feedback/:id/" element={<FeedbackViewPage />} />
+        <Route exact path="product_feedback_frontend_mentor/feedback/edit/:id" element={<FeedbackEdit />} />
         <Route path="product_feedback_frontend_mentor/add" element={<FeedbackAddPage />} />
+        <Route path="*" element={<NotFound /> } />
       </Routes>
       
     </>

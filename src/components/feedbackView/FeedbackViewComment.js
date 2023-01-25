@@ -7,7 +7,6 @@ import { useDispatch } from "react-redux";
 import { addReply } from "../../reducers/feedbacksSlice";
 
 function CommentReply({reply, handleReplyChange, postReply}) {
-  // console.log(reply)
   return (
     <CommentItemReply key={reply.id} > 
       <textarea name="comment" maxLength={255} value={reply} onChange={(e)=>handleReplyChange(e)}/>

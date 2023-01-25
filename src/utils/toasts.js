@@ -8,6 +8,9 @@ const style = {
 export const addSuccess = ()=>{
   toast.success("Feedback added.", style)
 }
+export const editSuccess = ()=>{
+  toast.success("Feedback updated.", style)
+}
 export const feedbackExists = ()=>{
   toast.error("Feedback title clash.", style)
 }

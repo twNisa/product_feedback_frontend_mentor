@@ -1,6 +1,6 @@
 import React from "react";
 import { useDispatch, useSelector } from "react-redux";
-import { useLocation, useNavigate } from "react-router-dom";
+import { useLocation, useNavigate, useParams } from "react-router-dom";
 import { BackButtonNavLink } from "../shared/BackButtonNavLink";
 import { FeedbackViewComments, FeedbackViewCommentsContainer, FeedbackViewContainer,FeedbackViewHeading, FeedbackViewNav, FeedbackViewAddComment } from "./FeedbackViewElements";
 import { FaAngleLeft } from "react-icons/fa";
@@ -28,7 +28,6 @@ export default function FeedbackView(){
   const currentFeedback = feedbacks.find(feedback => String(feedback.id) === feedbackId)
 
   function handleUpvoteClick(id){
-    console.log(`upvote ${id}`)
     dispatch(upvoteFeedback(id))
 
   }
@@ -62,7 +61,6 @@ export default function FeedbackView(){
     currentFeedback.comments.map((comment, index) => {
       return <FeedbackViewComment key={comment.id} id={comment.id} comment={comment} parentId={currentFeedback.id} />
     })
-    console.log(currentFeedback.comments)
     return (
       <FeedbackViewComments>
         {allComments}
@@ -74,12 +72,10 @@ export default function FeedbackView(){
   const [comment, setComment] = React.useState("")
 
   function handleCommentChange(e){
-    console.log(e.target.value)
     setComment(e.target.value)
   }
 
   function handleCommentButtonClick(){
-    console.log(comment)
     if(comment){
       const formatedComment = {
         replyId: currentFeedback.id,
@@ -95,18 +91,20 @@ export default function FeedbackView(){
     setComment("")
 
   }
+
+
   return (
     <FeedbackViewContainer>
       <FeedbackViewNav>
         <BackButtonNavLink
-          onClick={()=>navigate(-1)}
+          to="/product_feedback_frontend_mentor/"
           lightBg
         >
           <FaAngleLeft />
           <span>Go Back</span>
         </BackButtonNavLink>
         
-        <LinkButton to={location.pathname + "/" + "edit"} >Edit Feedback</LinkButton>
+        <LinkButton to={"/product_feedback_frontend_mentor/feedback/edit/" + feedbackId} >Edit Feedback</LinkButton>
       </FeedbackViewNav>
 
       
