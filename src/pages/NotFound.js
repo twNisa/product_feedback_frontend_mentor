@@ -9,14 +9,14 @@ export default function NotFound(){
   return (
     
     <>
-    <BackButtonNavLink
-        onClick={navigate("/product_feedback_frontend_mentor/")}
-        lightBg
-      >
-        <FaAngleLeft />
-        <span>Go Back</span>
-    </BackButtonNavLink>
-    404 Page not found
+      <BackButtonNavLink
+          onClick={navigate("/product_feedback_frontend_mentor/")}
+          lightBg
+        >
+          <FaAngleLeft />
+          <span>Go Back</span>
+      </BackButtonNavLink>
+      404 Page not found
     </>
   )
 }

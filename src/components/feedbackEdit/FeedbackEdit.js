@@ -29,20 +29,15 @@ export default function FeedbackEdit(){
     ))
   }
 
-
   const dispatch = useDispatch()
 
   function handleFeedbackEditSubmit(e){
     e.preventDefault()
-    console.log(newFeedback)
     dispatch(
       editFeedback(newFeedback)
     )
     navigate("/product_feedback_frontend_mentor/feedback/" + feedbackId)
     editSuccess()
-    
-
-
   }
 
   const navigate = useNavigate()

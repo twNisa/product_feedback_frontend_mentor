@@ -8,7 +8,7 @@ import { Button, LinkButton } from "../shared/TagButton";
 import { FeedbackItem } from "./FeedbackViewElements";
 import { UpvoteButton } from "../shared/TagButton";
 import { TagButton } from "../shared/TagButton";
-import { upvoteFeedback } from "../../reducers/feedbacksSlice";
+import { deleteFeedback, upvoteFeedback } from "../../reducers/feedbacksSlice";
 import { FaAngleUp } from "react-icons/fa";
 import commentsIcon from "../../assets/shared/icon-comments.svg"
 import { ReplyButton } from "../shared/TagButton";
@@ -17,6 +17,7 @@ import { FeedbackViewComment } from "./FeedbackViewComment";
 import { addComment } from "../../reducers/feedbacksSlice";
 import { nanoid } from "@reduxjs/toolkit";
 import localUser from "../../utils/localUser";
+import { delSuccess } from "../../utils/toasts";
 
 export default function FeedbackView(){
   const navigate = useNavigate()
@@ -91,7 +92,11 @@ export default function FeedbackView(){
     setComment("")
 
   }
-
+  function handleDelete(id){
+    dispatch(deleteFeedback(id))
+    delSuccess()
+    navigate("/product_feedback_frontend_mentor/")
+  }
 
   return (
     <FeedbackViewContainer>
@@ -103,8 +108,8 @@ export default function FeedbackView(){
           <FaAngleLeft />
           <span>Go Back</span>
         </BackButtonNavLink>
-        
-        <LinkButton to={"/product_feedback_frontend_mentor/feedback/edit/" + feedbackId} >Edit Feedback</LinkButton>
+        <Button as="button" onClick={()=>handleDelete(feedbackId)}>Delete</Button>
+        <LinkButton as="button" to={"/product_feedback_frontend_mentor/feedback/edit/" + feedbackId} >Edit Feedback</LinkButton>
       </FeedbackViewNav>
 
       

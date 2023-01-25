@@ -1,4 +1,5 @@
 import {createSlice, nanoid,} from "@reduxjs/toolkit"
+import { delSuccess } from "../utils/toasts"
 import {data} from "./data"
 
 const initialState = data
@@ -30,7 +31,6 @@ const feedbacksSlice = createSlice({
     },
     editFeedback(state, action){
       const feedbackToEdit = state.productRequests.find(feedback => String(feedback.id) === String(action.payload.id))
-      console.log(feedbackToEdit)
       if(feedbackToEdit){
         const result = state.productRequests.map(feedback => {
           if(String(feedback.id) === String(action.payload.id)){
@@ -39,12 +39,18 @@ const feedbacksSlice = createSlice({
             return feedback
           }
         })
-        console.log(result)
         return {productRequests: result}
       }
     },
+    deleteFeedback(state, action){
+      const feedbackTarget = state.productRequests.find(feedback => String(feedback.id) === String(action.payload))
+      if(feedbackTarget){
+        const result = state.productRequests.filter(feedback => String(feedback.id) !== String(action.payload))
+        return {productRequests: result}
+      } 
+
+    },
     upvoteFeedback(state, action){
-      console.log(action)
       const feedbackToUpvote = state.productRequests.find(feedback => feedback.id === action.payload)
       if(feedbackToUpvote){
         if(feedbackToUpvote.upvoted === false){
@@ -57,9 +63,7 @@ const feedbacksSlice = createSlice({
       }
     },
     addComment(state, action){
-      console.log(action)
       const feedbackToComment = state.productRequests.find(feedback => feedback.id === action.payload.replyId)
-      console.log(feedbackToComment)
 
       if(feedbackToComment){
         feedbackToComment.comments ? 
@@ -68,7 +72,6 @@ const feedbacksSlice = createSlice({
       }
     },
     addReply(state, action){
-      console.log(action.payload)
       const feedbackToComment = state.productRequests.find(feedback => feedback.id === action.payload.parentId)
       const commentToReply = feedbackToComment.comments.find(comment => comment.id === action.payload.commentId)
 
@@ -78,11 +81,12 @@ const feedbacksSlice = createSlice({
         commentToReply.replies = [action.payload.replyContent]
       }
     }
+    
 
   }
 
 })
 
-export const {addFeedback, editFeedback, upvoteFeedback, addComment, addReply} = feedbacksSlice.actions
+export const {addFeedback, editFeedback, deleteFeedback, upvoteFeedback, addComment, addReply} = feedbacksSlice.actions
 
 export default feedbacksSlice.reducer

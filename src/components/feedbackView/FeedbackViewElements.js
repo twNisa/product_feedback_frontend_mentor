@@ -10,8 +10,13 @@ export const FeedbackViewContainer  = styled.section`
 
 export const FeedbackViewNav = styled.nav`
   display: flex;
-  justify-content: space-between;
+  gap: 1rem;
   align-items: center;
+
+  & > a{
+    margin-right: auto;
+  }
+
 
 `
 

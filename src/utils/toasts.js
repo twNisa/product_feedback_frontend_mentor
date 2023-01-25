@@ -11,6 +11,9 @@ export const addSuccess = ()=>{
 export const editSuccess = ()=>{
   toast.success("Feedback updated.", style)
 }
+export const delSuccess = ()=>{
+  toast.success("Feedback deleted.", style)
+}
 export const feedbackExists = ()=>{
   toast.error("Feedback title clash.", style)
 }
