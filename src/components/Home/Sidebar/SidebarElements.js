@@ -17,6 +17,16 @@ export const SidebarContainer = styled.section`
     min-height: 10rem;
     
   }
+
+  @media (width < 950px) {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    position: relative;
+    top: 0;
+    width: 100%;
+    max-width: fit-content;
+    justify-content: space-between;
+  }
 `
 
 export const LogoContainer = styled.div`
@@ -56,6 +66,7 @@ export const RoadmapContainer = styled.div`
   gap: 1rem;
 
   & > div{
+    gap: 1rem;
     display: flex;
     flex-direction: row;
     justify-content: space-between;

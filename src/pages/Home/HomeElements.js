@@ -6,4 +6,8 @@ export const HomeContainer = styled.section`
   display: flex;
   justify-content: space-between;
   gap: 1rem;
+
+  @media (width < 950px){
+    flex-direction: column;
+  }
 `
